@@ -1,33 +1,39 @@
 const mongoose = require('mongoose');
 
+let cachedConnection = null;
+
 const connectDB = async () => {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
     console.warn('MONGODB_URI not set - skipping MongoDB connection');
-    return;
+    return null;
+  }
+
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+
+  if (cachedConnection) {
+    return cachedConnection;
   }
 
   // Configure mongoose (avoid deprecated options warnings)
   mongoose.set('strictQuery', false);
   mongoose.set('bufferCommands', false);
 
-  const connectWithRetry = async (retries = 0) => {
-    try {
-      await mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
+  cachedConnection = mongoose
+    .connect(uri)
+    .then(() => {
       console.log('MongoDB connected');
-    } catch (err) {
+      return mongoose.connection;
+    })
+    .catch((err) => {
+      cachedConnection = null;
       console.error(`MongoDB connection error: ${err.message}`);
-      // Do not exit the process; schedule a retry so server stays up for local testing
-      const delay = Math.min(30000, 2000 * Math.pow(2, retries)); // exponential backoff up to 30s
-      console.log(`Retrying MongoDB connection in ${delay / 1000}s...`);
-      setTimeout(() => connectWithRetry(retries + 1), delay);
-    }
-  };
+      return null;
+    });
 
-  connectWithRetry();
+  return cachedConnection;
 };
 
 module.exports = connectDB;

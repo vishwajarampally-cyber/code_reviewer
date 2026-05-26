@@ -1,5 +1,6 @@
 const ReviewHistory = require('../models/ReviewHistory');
 const Analytics = require('../models/Analytics');
+const connectDB = require('../config/db');
 const aiProvider = require('../services/ai/aiProvider');
 const reviewService = require('../services/reviewService');
 
@@ -25,6 +26,7 @@ exports.createReview = async (req, res) => {
   };
 
   // If MongoDB is connected, persist review and update analytics. Otherwise return mock response without saving.
+  await connectDB();
   const mongoose = require('mongoose');
   if (mongoose.connection && mongoose.connection.readyState === 1) {
     const reviewDoc = new ReviewHistory(payload);
@@ -51,6 +53,7 @@ exports.createReview = async (req, res) => {
 
 exports.listReviews = async (req, res) => {
   try {
+    await connectDB();
     const mongoose = require('mongoose');
     if (mongoose.connection && mongoose.connection.readyState === 1) {
       const records = await ReviewHistory.find().sort({ createdAt: -1 }).limit(100);
@@ -65,6 +68,7 @@ exports.listReviews = async (req, res) => {
 
 exports.getAnalytics = async (req, res) => {
   try {
+    await connectDB();
     const mongoose = require('mongoose');
     if (mongoose.connection && mongoose.connection.readyState === 1) {
       const agg = await reviewService.calculateAnalytics();
@@ -88,6 +92,7 @@ exports.getAnalytics = async (req, res) => {
 exports.deleteReview = async (req, res) => {
   try {
     const { id } = req.params;
+    await connectDB();
     const mongoose = require('mongoose');
     if (mongoose.connection && mongoose.connection.readyState === 1) {
       const removed = await ReviewHistory.findByIdAndDelete(id);
