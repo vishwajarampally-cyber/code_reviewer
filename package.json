@@ -1,0 +1,16 @@
+{
+  "name": "automated-code-reviewer",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\"",
+    "dev:server": "npm --prefix server run dev",
+    "dev:client": "npm --prefix client run dev",
+    "start": "node server/index.js",
+    "build": "npm --prefix client run build && npm --prefix server run build",
+    "lint": "echo \"No linter configured\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
+}

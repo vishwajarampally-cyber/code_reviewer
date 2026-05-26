@@ -1,0 +1,163 @@
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.dashboard-grid .top {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 12px 0 8px 0;
+}
+
+.dashboard-grid .top h1 {
+  font-size: 38px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+  letter-spacing: -0.04em;
+}
+
+.dashboard-grid .top p {
+  color: var(--text-secondary);
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.editor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--card);
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.editor-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Styled select */
+.editor-controls select {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px 36px 10px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background-color: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  transition: var(--transition);
+}
+
+.editor-controls select:hover, .editor-controls select:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.editor-controls .buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.editor-controls .buttons button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.editor-controls .buttons button:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text);
+}
+
+:root[data-theme='dark'] .editor-controls .buttons button:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Primary button */
+.editor-controls .buttons button:first-child {
+  background: var(--accent-gradient);
+  border: 0;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(79, 70, 229, 0.3);
+}
+
+:root[data-theme='dark'] .editor-controls .buttons button:first-child {
+  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+}
+
+.editor-controls .buttons button:first-child:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+}
+
+:root[data-theme='dark'] .editor-controls .buttons button:first-child:hover {
+  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.5);
+}
+
+.editor-controls .buttons button:first-child:active {
+  transform: translateY(0);
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.results h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid .top h1 {
+    font-size: 28px;
+  }
+  .editor-section {
+    padding: 16px;
+  }
+  .editor-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .editor-controls select {
+    width: 100%;
+  }
+  .editor-controls .buttons {
+    width: 100%;
+  }
+  .editor-controls .buttons button {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
+

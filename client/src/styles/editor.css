@@ -1,0 +1,70 @@
+.editor-wrap {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.editor-wrap:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1), var(--shadow-hover);
+}
+
+:root[data-theme='dark'] .editor-wrap:focus-within {
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15), var(--shadow-hover);
+}
+
+.editor-actions {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.editor-actions button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  background: var(--card);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.editor-actions button:hover {
+  background: rgba(0, 0, 0, 0.03);
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+:root[data-theme='dark'] .editor-actions button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-light);
+}
+
+.editor-actions button svg {
+  stroke: var(--muted);
+  transition: var(--transition);
+}
+
+.editor-actions button:hover svg {
+  stroke: var(--accent);
+  transform: rotate(45deg);
+}
+
+:root[data-theme='dark'] .editor-actions button:hover svg {
+  stroke: var(--accent-light);
+}
+
